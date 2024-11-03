@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        // Definimos el array 'clase' con la información de los estudiantes
+        const clase = [
+            ["Juan Pérez", 16, 8.5, 7.0, 9.0],
+            ["María García", 15, 9.0, 8.5, 9.5],
+            ["Carlos Sánchez", 17, 7.0, 6.5, 7.5],
+            ["Laura Fernández", 16, 8.0, 9.0, 8.5],
+            ["Ana López", 15, 7.5, 8.0, 7.0]
+        ];
+        // funcion para la info de la tabla
+        function mostrarInformacionClase() {
+            const tabla = document.getElementById("tablaClase");
+
+        // recorremos array y creamos fila en la tabla
+        clase.forEach(alumno=> {
+            const fila = document.createElement("tr");
+            // hacemos celda para cada dato
+            alumno.forEach(dato => {
+                const celda = document.createElement("td");
+                fila.appendChild(celda);
+            });
+            tabla.appendChild(fila);
+        });
+        }
+        // la funcion para obtener la nota del estudiante en el trimestre especifico
+        function obtenerNota(estudianteIndex, trimestre = "media") {
+            if (estudianteIndex < 0 || estudianteIndex >= clase.length) {
+                return "Indice de estudiante no válido";
+            }
+            const alumno = clase [estudianteIndex];
+            const notas = [alumno[2],alumno[3], alumno[4]];
+            if (trimestre === "media"){
+                //calculo de la media
+                const media = notas.reduce((acc,nota) => + nota, 0)/ notas.length;
+                return 'La nota del ${trimestre}º trimestre de ${alumno[0]} es ${notas[trimestre -1]}';
+               } else {
+                    return "Trimestre no válido.Debe ser 1, 2 o 3";
+            }
+        }
+        // Ejemplos de uso de la función obtenerNota
+        console.log(obtenerNota(0, 1)); // Nota del primer trimestre de Juan Pérez
+        console.log(obtenerNota(1, 2)); // Nota del segundo trimestre de María García
+        console.log(obtenerNota(2));    // Nota media de Carlos Sánchez
+
+        // Llamamos a la función para mostrar la información al cargar la página
+        mostrarInformacionClase();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

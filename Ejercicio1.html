@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información de la Clase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Información de la Clase</h1>
+    <p>A continuación se muestra la información de cada alumno en la clase.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Nota 1er Trimestre</th>
+                <th>Nota 2do Trimestre</th>
+                <th>Nota 3er Trimestre</th>
+            </tr>
+        </thead>
+        <tbody id="tablaClase">
+        </tbody>
+    </table>
+
+    <script>
+        // Definimos el array 'clase' con la información de los estudiantes
+        const clase = [
+            ["Juan Pérez", 16, 8.5, 7.0, 9.0],
+            ["María García", 15, 9.0, 8.5, 9.5],
+            ["Carlos Sánchez", 17, 7.0, 6.5, 7.5],
+            ["Laura Fernández", 16, 8.0, 9.0, 8.5],
+            ["Ana López", 15, 7.5, 8.0, 7.0]
+        ];
+
+        // Función para mostrar la información en la tabla
+        function mostrarInformacionClase() {
+            const tabla = document.getElementById("tablaClase");
+
+            // Recorremos cada elemento del array 'clase' y creamos una fila en la tabla
+            clase.forEach(alumno => {
+                const fila = document.createElement("tr");
+
+                // Creamos una celda para cada dato del alumno
+                alumno.forEach(dato => {
+                    const celda = document.createElement("td");
+                    celda.textContent = dato;
+                    fila.appendChild(celda);
+                });
+
+                tabla.appendChild(fila);
+            });
+        }
+
+        // Llamamos a la función para mostrar la información al cargar la página
+        mostrarInformacionClase();
+    </script>
+</body>
+</html>
