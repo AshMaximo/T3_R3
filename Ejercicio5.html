@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function paresImpares() {
+            let array = [];
+            for (let i = 0; i < 100; i++) {
+                let random = Math.random();
+                random = Math.floor(random * 1000 + 1);
+                array.push(random);
+
+            }
+            let arrayPares = [];
+            let arrayImpar = [];
+            for (let i = 0; i < array.length; i++) {
+                if (array[i] % 2 == 0) {
+                    arrayPares.push(array[i]);
+                } else { arrayImpar.push(array[i]); }
+            }
+            let arrayOrganizado = arrayPares.concat(arrayImpar);
+            
+            return arrayOrganizado;
+        } 
+        console.log(paresImpares());
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

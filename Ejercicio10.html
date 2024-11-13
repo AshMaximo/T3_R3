@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Asientos</title>
+</head>
+<body>
+
+<h2>Reserva de Asientos</h2>
+<label for="tipoAsiento">Selecciona el tipo de asiento:</label>
+<select id="tipoAsiento">
+    <option value="First">Primera Clase (Asientos 1-5)</option>
+    <option value="Turista">Turista (Asientos 6-10)</option>
+</select>
+<button onclick="reservarAsiento()">Reservar Asiento</button>
+<p id="mensaje"></p>
+
+<script>
+    // Array para los asientos (10 plazas en total, inicialmente todas libres)
+    const asientos = Array(10).fill(false); // false = libre, true = ocupado
+
+    // Función para reservar asiento
+    function reservarAsiento() {
+        const tipoAsiento = document.getElementById('tipoAsiento').value;
+        let asientoAsignado = -1;
+        
+        // Determinar el rango de asientos según el tipo
+        let inicio = tipoAsiento === 'First' ? 0 : 5;
+        let fin = tipoAsiento === 'First' ? 4 : 9;
+
+        // Buscar el primer asiento libre en el rango
+        for (let i = inicio; i <= fin; i++) {
+            if (!asientos[i]) { // Si el asiento está libre
+                asientos[i] = true; // Marcar asiento como ocupado
+                asientoAsignado = i + 1; // Guardar el número de asiento (1 a 10)
+                break;
+            }
+        }
+
+        // Mostrar mensaje o tarjeta de embarque según el resultado
+        if (asientoAsignado === -1) {
+            document.getElementById('mensaje').innerText = `No hay asientos disponibles en ${tipoAsiento}.`;
+        } else {
+            document.getElementById('mensaje').innerText = `Asiento ${asientoAsignado} en ${tipoAsiento} reservado.`;
+            mostrarTarjetaDeEmbarque(asientoAsignado, tipoAsiento);
+        }
+    }
+
+    // Función para abrir la tarjeta de embarque en una nueva ventana
+    function mostrarTarjetaDeEmbarque(asiento, clase) {
+        const nuevaVentana = window.open('', '', 'width=300,height=200');
+        nuevaVentana.document.write(`
+            <h3>Tarjeta de Embarque</h3>
+            <p><strong>Asiento:</strong> ${asiento}</p>
+            <p><strong>Clase:</strong> ${clase}</p>
+            <p><strong>Aerolínea:</strong> Vuelo Simulado</p>
+        `);
+        nuevaVentana.document.close();
+    }
+</script>
+
+</body>
+</html>

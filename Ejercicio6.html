@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // Array para almacenar vendedores
+        const vendedores = [];
+    
+        // Función para agregar un vendedor y calcular su sueldo
+        function agregarVendedor() {
+            const nombre = document.getElementById("nombreVendedor").value;
+            const ventas = parseFloat(document.getElementById("ventasVendedor").value);
+    
+            if (nombre === "" || isNaN(ventas) || ventas < 0) {
+                alert("Por favor, ingresa un nombre válido y ventas mayores o iguales a 0.");
+                return;
+            }
+    
+            // Calcular sueldo final
+            const sueldoBase = 200;
+            const porcentajeComision = 0.09;
+            const comision = ventas * porcentajeComision;
+            const sueldoFinal = sueldoBase + comision;
+    
+            // Agregar vendedor al array
+            vendedores.push({ nombre, ventas, sueldoFinal });
+    
+            // Limpiar campos de entrada
+            document.getElementById("nombreVendedor").value = "";
+            document.getElementById("ventasVendedor").value = "";
+    
+            // Mostrar resultado
+            mostrarResultado();
+        }
+    
+        // Función para mostrar el resultado de los sueldos de los vendedores
+        function mostrarResultado() {
+            const resultadoDiv = document.getElementById("resultado");
+            resultadoDiv.innerHTML = "<h3>Sueldo de Vendedores:</h3>";
+            
+            vendedores.forEach(vendedor => {
+                resultadoDiv.innerHTML += `
+                    <p><strong>Nombre:</strong> ${vendedor.nombre}</p>
+                    <p><strong>Ventas:</strong> $${vendedor.ventas.toFixed(2)}</p>
+                    <p><strong>Sueldo Final:</strong> $${vendedor.sueldoFinal.toFixed(2)}</p>
+                    <hr>
+                `;
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora de Comisiones</h2>
+        <input type="text" id="nombreVendedor" placeholder="Nombre del vendedor">
+        <input type="number" id="ventasVendedor" placeholder="Ventas de la semana ($)">
+        <button onclick="agregarVendedor()">Agregar Vendedor</button>
+        
+        <div class="result" id="resultado"></div>
+    </div>
+</body>
+</html>

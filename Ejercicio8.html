@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+// Array unidimensional para almacenar la frecuencia de cada suma de 2 a 12
+const resultados = new Array(13).fill(0); // Inicia con ceros, índice 0 y 1 no se usan
+
+// Simulación de 36,000 lanzamientos
+for (let i = 0; i < 36000; i++) {
+    // Generar dos lanzamientos de dado aleatorios (de 1 a 6)
+    const dado1 = Math.floor(Math.random() * 6) + 1;
+    const dado2 = Math.floor(Math.random() * 6) + 1;
+    
+    // Calcular la suma de los dos dados
+    const suma = dado1 + dado2;
+
+    // Incrementar el contador para esta suma
+    resultados[suma]++;
+}
+
+// Mostrar el número de veces que aparece cada suma de 2 a 12
+console.log("Suma\tFrecuencia");
+for (let suma = 2; suma <= 12; suma++) {
+    console.log(`${suma}\t${resultados[suma]}`);
+}
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

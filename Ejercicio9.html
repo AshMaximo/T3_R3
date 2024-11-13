@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // Array unidimensional para almacenar la frecuencia de cada suma de 2 a 12
+const resultados = new Array(13).fill(0); // Índices del 0 al 12, usamos solo 2 a 12
+
+// Array bidimensional para almacenar la frecuencia de cada combinación de dados (6x6)
+const combinaciones = Array.from({ length: 6 }, () => new Array(6).fill(0));
+
+// Simulación de 36,000 lanzamientos
+for (let i = 0; i < 36000; i++) {
+    // Generar dos lanzamientos de dado aleatorios (de 1 a 6)
+    const dado1 = Math.floor(Math.random() * 6) + 1;
+    const dado2 = Math.floor(Math.random() * 6) + 1;
+    
+    // Calcular la suma de los dos dados
+    const suma = dado1 + dado2;
+
+    // Incrementar el contador para esta suma
+    resultados[suma]++;
+
+    // Incrementar el contador para esta combinación específica de dados
+    combinaciones[dado1 - 1][dado2 - 1]++;
+}
+
+// Mostrar el número de veces que aparece cada suma de 2 a 12
+console.log("Suma\tFrecuencia");
+for (let suma = 2; suma <= 12; suma++) {
+    console.log(`${suma}\t${resultados[suma]}`);
+}
+
+// Mostrar la tabla bidimensional de combinaciones
+console.log("\nTabla de combinaciones:");
+console.log("Dado1/Dado2\t1\t2\t3\t4\t5\t6");
+for (let dado1 = 0; dado1 < 6; dado1++) {
+    let fila = `${dado1 + 1}\t\t`;
+    for (let dado2 = 0; dado2 < 6; dado2++) {
+        fila += `${combinaciones[dado1][dado2]}\t`;
+    }
+    console.log(fila);
+}
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

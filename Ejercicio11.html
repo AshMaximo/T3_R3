@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen de Ventas</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+            text-align: center;
+        }
+        table {
+            margin-top: 20px;
+            width: 100%;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Resumen de Ventas por Vendedor y Producto</h2>
+
+<div id="tablaVentas"></div>
+
+<script>
+    // Definir la matriz de ventas: 5 filas (productos) x 4 columnas (vendedores), inicializada en 0
+    const ventas = Array.from({ length: 5 }, () => Array(4).fill(0)); // 5 productos x 4 vendedores
+
+    // Simulación de datos de ventas
+    function generarDatosAleatorios() {
+        for (let dia = 0; dia < 30; dia++) { // Para cada día del mes
+            const numVentas = Math.floor(Math.random() * 6); // Cada vendedor tiene entre 0 y 5 ventas diarias
+            for (let venta = 0; venta < numVentas; venta++) {
+                const vendedor = Math.floor(Math.random() * 4); // Vendedor (0 a 3)
+                const producto = Math.floor(Math.random() * 5); // Producto (0 a 4)
+                const valorVenta = Math.floor(Math.random() * 100) + 1; // Valor de venta entre 1 y 100
+                ventas[producto][vendedor] += valorVenta; // Acumular la venta en la matriz
+            }
+        }
+    }
+
+    // Generar datos de ventas para el mes pasado
+    generarDatosAleatorios();
+
+    // Calcular ventas acumuladas por producto y por vendedor
+    function generarTablaVentas() {
+        let tabla = '<table><tr><th>Producto \\ Vendedor</th>';
+        
+        // Encabezados de las columnas para cada vendedor
+        for (let i = 1; i <= 4; i++) {
+            tabla += `<th>Vendedor ${i}</th>`;
+        }
+        tabla += '<th>Total por Producto</th></tr>';
+
+        // Total de ventas por cada producto y por vendedor
+        for (let i = 0; i < 5; i++) {
+            let totalProducto = 0;
+            tabla += `<tr><td>Producto ${i + 1}</td>`;
+            for (let j = 0; j < 4; j++) {
+                tabla += `<td>${ventas[i][j]}</td>`;
+                totalProducto += ventas[i][j];
+            }
+            tabla += `<td><strong>${totalProducto}</strong></td></tr>`;
+        }
+
+        // Agregar la última fila para el total por vendedor
+        tabla += '<tr><td><strong>Total por Vendedor</strong></td>';
+        for (let j = 0; j < 4; j++) {
+            let totalVendedor = 0;
+            for (let i = 0; i < 5; i++) {
+                totalVendedor += ventas[i][j];
+            }
+            tabla += `<td><strong>${totalVendedor}</strong></td>`;
+        }
+        tabla += '</tr></table>';
+
+        // Mostrar la tabla en el div
+        document.getElementById('tablaVentas').innerHTML = tabla;
+    }
+
+    // Llamar a la función para generar y mostrar la tabla de ventas
+    generarTablaVentas();
+</script>
+
+</body>
+</html>

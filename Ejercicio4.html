@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const clase = [
+            ["Juan Pérez", 16, 8.5, 7.0, 9.0],
+            ["María García", 15, 9.0, 8.5, 9.5],
+            ["Carlos Sánchez", 17, 7.0, 6.5, 7.5],
+            ["Laura Fernández", 16, 8.0, 9.0, 8.5],
+            ["Ana López", 15, 7.5, 8.0, 7.0]
+        ];
+        function nombreRandom(clase) {
+            let rnd = Math.random();
+            rnd = Math.floor(rnd * (clase.length));
+            const nombre = clase[rnd][0];
+            return nombre;
+        } 
+        console.log(nombreRandom(clase));
+    </script>
+</body>
+
+</html>

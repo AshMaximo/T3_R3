@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos funciones </title>
+</head>
+<body>
+    <script>
+        //funcion constructora
+        function usuario(dni,nombre,edad) {
+            this.dni =dni
+            this.nombre =nombre
+            this.edad =edad
+            this.showMe=function(){
+                console.log('Dni: ${this.dni} -- Nombre: ${this.nombre}')
+            }
+        }
+        var array =[
+            new Usuario("222222d,pepe,20"),new Usuario("222222d,pepe,20")
+        ];
+        const
+        
+        let objuser1 = new Usuario ('7777777X,Juan, 16');
+        console.log(objuser1);
+        console.log(objuser1.dni);
+
+        class Empleado {
+            constructor (codigo,nombre,telefono){
+                this.codigo=codigo
+                this.nombre=nombre
+                this.telefono=telefono
+            }
+            muestraEmpleado(){
+                console.log("Empleado"+ this.nombre + "con codigo"+ this.codigo )
+            }
+            let objEmp1=new Empleado(1,"Maria",6121246);
+        } console.log(objEmp1);
+    </script>
+</body>
+</html>
